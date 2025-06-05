@@ -1,0 +1,6 @@
+@Application.IdentityProvider.WebApi_HostAddress = http://localhost:5160
+
+GET {{Application.IdentityProvider.WebApi_HostAddress}}/weather
+Accept: application/json
+
+###
