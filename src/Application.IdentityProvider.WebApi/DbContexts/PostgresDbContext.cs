@@ -1,25 +1,27 @@
-﻿using Application.IdentityProvider.WebApi.Common;
-using Microsoft.EntityFrameworkCore;
+﻿namespace Application.IdentityProvider.WebApi.DbContexts;
 
-namespace Application.IdentityProvider.WebApi.DbContexts;
-
-public class PostgresDbContext : DbContext
+public class PostgresDbContext : 
+    IdentityDbContext<
+        ApplicationUser,
+        ApplicationRole,
+        Guid,
+        ApplicationUserClaim,
+        ApplicationUserRole,
+        ApplicationUserLogin,
+        ApplicationRoleClaim,
+        ApplicationUserToken
+    >
 {
-    public DbSet<ApplicationUser> ApplicationUsers { get; set; }
-    
     public PostgresDbContext(DbContextOptions<PostgresDbContext> options) : base(options)
     {
         
     }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder builder)
     {
-        
-        base.OnModelCreating(modelBuilder);
-        
-        modelBuilder.Entity<ApplicationUser>().ToTable("users");
-        
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(PostgresDbContext).Assembly);
+        base.OnModelCreating(builder);
+        builder.HasDefaultSchema("Identity");
+        builder.ApplyConfigurationsFromAssembly(typeof(PostgresDbContext).Assembly);
     }
 }
 

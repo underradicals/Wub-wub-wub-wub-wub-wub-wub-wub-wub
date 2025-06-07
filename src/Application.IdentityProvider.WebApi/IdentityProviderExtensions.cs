@@ -1,15 +1,16 @@
-﻿using Application.IdentityProvider.WebApi.Common;
-using Application.IdentityProvider.WebApi.DbContexts;
-using Application.IdentityProvider.WebApi.Features;
-
-namespace Application.IdentityProvider.WebApi;
+﻿namespace Application.IdentityProvider.WebApi;
 
 public static class IdentityProviderExtensions
 {
     
-    public static WebApplicationBuilder CreateApplicationBuilder(string[] args)
+    public static WebApplicationBuilder CreateApplication(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+        
+        builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection(JwtSettings.SectionName));
+        builder.Services.AddSingleton<JwtSettings>(serviceProvider => serviceProvider.GetRequiredService<IOptions<JwtSettings>>().Value);
+
+        builder.Services.AddIdpIdentity(builder.Configuration);
         builder.AddIdpServices();
         return builder;
     }
@@ -18,6 +19,10 @@ public static class IdentityProviderExtensions
     {
         var app = builder.Build();
         app.UseIdpServices();
+        
+        app.UseAuthentication();
+        app.UseAuthorization();
+        
         return app;
     }
     
@@ -34,7 +39,7 @@ public static class IdentityProviderExtensions
         {
             app.MapOpenApi();
         }
-
+        
         app.UseHttpsRedirection();
         app.UseEndpoints();
         return app;

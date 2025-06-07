@@ -1,6 +1,4 @@
-﻿using Application.IdentityProvider.WebApi.Common.EmailVerification;
-
-namespace Application.IdentityProvider.WebApi.Common;
+﻿namespace Application.IdentityProvider.WebApi.Common;
 
 public static class ServiceCollectionExtensions
 {

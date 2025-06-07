@@ -1,8 +1,6 @@
-using Application.IdentityProvider.WebApi;
-
 try
 {
-    var builder = IdentityProviderExtensions.CreateApplicationBuilder(args);
+    var builder = IdentityProviderExtensions.CreateApplication(args);
     var app = builder.BuildApplication();
     app.Run();
 }

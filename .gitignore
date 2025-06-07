@@ -1,6 +1,7 @@
 # IDE
 .vscode/
 .idea/
+.vs/
 
 # Python
 .venv/
