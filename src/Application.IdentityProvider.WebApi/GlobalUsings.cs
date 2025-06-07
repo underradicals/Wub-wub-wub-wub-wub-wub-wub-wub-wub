@@ -26,3 +26,5 @@ global using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 global using Application.IdentityProvider.WebApi.IdentityModels;
 global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+global using FluentValidation;
+global using Microsoft.AspNetCore.Mvc;

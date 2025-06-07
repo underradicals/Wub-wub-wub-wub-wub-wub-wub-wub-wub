@@ -29,6 +29,7 @@ public static class ApplicationIdentityService
             options.EnableDetailedErrors(true);
             options.EnableSensitiveDataLogging();
         });
+        services.AddAuthorization();
         return services;
     }
 
@@ -37,6 +38,8 @@ public static class ApplicationIdentityService
         options.DefaultScheme = IdentityConstants.BearerScheme;
         options.DefaultChallengeScheme = IdentityConstants.BearerScheme;
         options.DefaultAuthenticateScheme = IdentityConstants.BearerScheme;
+        
+        options.DefaultSignInScheme = IdentityConstants.ApplicationScheme;
     }
 }
 

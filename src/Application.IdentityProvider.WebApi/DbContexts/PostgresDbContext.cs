@@ -29,7 +29,7 @@ public static class PostgresDbContextExtensions
 {
     public static void AddPostgresDbContext(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContextPool<PostgresDbContext>(options =>
+        services.AddDbContext<PostgresDbContext>(options =>
         {
             options.UseNpgsql(configuration.GetConnectionString("PostgresConnection"));
             options.EnableDetailedErrors(true);

@@ -1,4 +1,6 @@
-﻿namespace Application.IdentityProvider.WebApi;
+﻿using Microsoft.AspNetCore.Authorization;
+
+namespace Application.IdentityProvider.WebApi;
 
 public static class IdentityProviderExtensions
 {
@@ -20,8 +22,13 @@ public static class IdentityProviderExtensions
         var app = builder.Build();
         app.UseIdpServices();
         
+        app.UseHttpsRedirection();
         app.UseAuthentication();
         app.UseAuthorization();
+        app.MapIdentityApi<ApplicationUser>();
+        
+        app.MapGet("/secure", [Authorize] () => "Secure")
+            .RequireAuthorization();
         
         return app;
     }

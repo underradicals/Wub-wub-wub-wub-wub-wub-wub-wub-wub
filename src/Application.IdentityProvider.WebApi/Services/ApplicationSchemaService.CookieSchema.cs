@@ -10,15 +10,10 @@ public static partial class ApplicationSchemaService
 
     private static void CookieSchemaConfiguration(CookieAuthenticationOptions options)
     {
-        // options.LoginPath = "/Account/Login";
-        // options.AccessDeniedPath = "/Account/AccessDenied";
-        // options.LogoutPath = "/Account/Logout";
-        options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
-        options.SlidingExpiration = true;
+        options.Cookie.Name = "Identity";
         options.Cookie.HttpOnly = true;
-        options.Cookie.IsEssential = true;
-        options.Cookie.SameSite = SameSiteMode.Lax;
         options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
-        options.Cookie.MaxAge = TimeSpan.FromDays(365);
+        options.Cookie.SameSite = SameSiteMode.Lax;
+        options.Cookie.IsEssential = true;
     }
 }

@@ -6,7 +6,13 @@ public static partial class ApplicationSchemaService
         IConfiguration configuration)
     {
 
-        services.AddJwtBearer(IdentityConstants.BearerScheme, JsonWebTokenSchemaConfiguration(configuration));
+        // services.AddJwtBearer(IdentityConstants.BearerScheme, JsonWebTokenSchemaConfiguration(configuration));
+        services.AddBearerToken(IdentityConstants.BearerScheme, options =>
+        {
+            options.BearerTokenExpiration = TimeSpan.FromHours(1);
+            options.RefreshTokenExpiration = TimeSpan.FromDays(7);
+            options.Validate();
+        });
         return services;
     }
 
