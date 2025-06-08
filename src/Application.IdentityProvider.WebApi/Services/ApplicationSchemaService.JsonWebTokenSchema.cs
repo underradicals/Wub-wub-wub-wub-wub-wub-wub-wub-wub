@@ -5,8 +5,6 @@ public static partial class ApplicationSchemaService
     private static AuthenticationBuilder AddIdpJsonWebTokenSchema(this AuthenticationBuilder services,
         IConfiguration configuration)
     {
-
-        // services.AddJwtBearer(IdentityConstants.BearerScheme, JsonWebTokenSchemaConfiguration(configuration));
         services.AddBearerToken(IdentityConstants.BearerScheme, options =>
         {
             options.BearerTokenExpiration = TimeSpan.FromHours(1);
@@ -34,7 +32,8 @@ public static partial class ApplicationSchemaService
                 ValidateAudience = true,
                 ValidateIssuer = true,
                 ValidateIssuerSigningKey = true,
-                ValidateLifetime = true
+                ValidateLifetime = true,
+                ValidAlgorithms = [SecurityAlgorithms.HmacSha256, SecurityAlgorithms.RsaSha256],
             };
         };
     }
